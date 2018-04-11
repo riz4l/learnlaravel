@@ -44,9 +44,9 @@ class Crudcontroller extends Controller
 
     public function lihatdata()
     {
-        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->get();
-
-            return View::make('read')->with('siswa',$data);
+       
+        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->paginate(5);
+        return View::make('read')->with('siswa',$data);
     }
 
     public function editdata($id)

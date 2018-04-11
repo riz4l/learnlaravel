@@ -58,6 +58,7 @@
               @endforeach
             </tbody>
           </table>
+          {!! $siswa->render() !!}
           <hr>
           <h5 align="center">Copyright Rizki Fahrizal 2018</h5>
     </div>
