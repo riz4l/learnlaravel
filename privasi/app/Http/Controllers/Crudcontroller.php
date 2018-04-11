@@ -79,6 +79,13 @@ class Crudcontroller extends Controller
         return Redirect::to('read')->with('message','berhasil mengedit data');
     }
 
+    public function search(Request $request){
+
+        $cari = $request->get('search');
+        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->where('nama','LIKE','%'.$cari.'%')->paginate(10);
+        return view('read', compact($data))->with('siswa',$data);;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

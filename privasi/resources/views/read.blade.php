@@ -10,9 +10,24 @@
   </div>
 @endif
   <p></p>
-  <h2>Data Mahasiswa</h2>
-  <a href="{{ url('home') }}"><span class="glyphicon glyphicon-home"></span> Home</a>
-  <a href="{{ url('formtambah') }}"><span class="glyphicon glyphicon-plus"></span> Tambah</a>
+  <h2 style="border-bottom:solid 1px #d8d0d0;">Data Mahasiswa</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <a href="{{ url('home') }}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-home"></span> Home</a>
+      <a href="{{ url('read') }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-list"></span> Data</a>
+      <a href="{{ url('formtambah') }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-plus"></span> Tambah</a>
+    </div>
+    <div class="col-md-6">  
+      {!! Form::open(['method'=>'GET','url'=>'/cari','role'=>'search']) !!}
+      <div class="input-group">
+        <input type="text" class="form-control input-sm" name="search" placeholder="search..">
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-sm" type="button">Go!</button>
+        </span>
+      </div><!-- /input-group -->
+      {!! Form::close() !!}
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <table class="table table-striped">

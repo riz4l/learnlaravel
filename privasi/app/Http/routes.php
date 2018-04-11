@@ -28,3 +28,5 @@ Route::get('hapus/{id}','Crudcontroller@hapusdata');
 Route::get('formedit/{id}','Crudcontroller@editdata');
 
 Route::post('prosesedit','Crudcontroller@proseseditdata');
+
+Route::get('cari','Crudcontroller@search');
