@@ -23,7 +23,7 @@
                 <th>Alamat</th>
                 <th>Semester</th>
                 <th>Jurusan</th>
-                <th>Action</th>
+                <th width="15%">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -36,8 +36,8 @@
                 <td>{{ $data->semester}}</td>
                 <td>{{ $data->jurusan}}</td>
                 <td>
-                	<a href="formedit/{{ $data->id }}">Edit</a> || 
-                	<a href="hapus/{{ $data->id }}" onclick="return confirm('Apakah anda yakin?')">Delete</a>
+                	<a href="formedit/{{ $data->id }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> Edit</a> || 
+                	<a href="hapus/{{ $data->id }}" onclick="return confirm('Apakah anda yakin?')"  class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                 </td>
               </tr>
               @endforeach
