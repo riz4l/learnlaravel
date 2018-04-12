@@ -10,7 +10,7 @@
   </div>
 @endif
   <p></p>
-  <h2 style="border-bottom:solid 1px #d8d0d0;">Data Mahasiswa</h2>
+  <h2 style="border-bottom:solid 1px #d8d0d0;">Data Mahasiswa <small style="float:right;">{{ Auth::user()->username }} <a href="{{ url('logout')}}">|| Logout</a></small></h2>
   <div class="row">
     <div class="col-md-6">
       <a href="{{ url('home') }}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-home"></span> Home</a>

@@ -32,9 +32,11 @@
 			    		{!! Form::submit('Ubah Data', ['class'=> 'btn btn-danger']) !!}
 			    	</div>
 			    {!! Form::close() !!}
-			    @stop
 			  </div>
 			</div>
+			<hr>
+			<h5 align="center">Copyright Rizki Fahrizal 2018</h5>
+			  @stop
 		</div>
 	</div>
 </div>

@@ -12,7 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+	if(Auth::user()){ 
+     	if(Auth::user()->hak_akses=="admin"){ 
+    		return view('home');
+     	}else{ 
+    		return view('user'); 
+    	} 
+    } 
+    else{ 
+        return view('login'); 
+    }
 });
 
 Route::get('/home','Crudcontroller@index');
@@ -30,3 +39,17 @@ Route::get('formedit/{id}','Crudcontroller@editdata');
 Route::post('prosesedit','Crudcontroller@proseseditdata');
 
 Route::get('cari','Crudcontroller@search');
+
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::get('register', function () {
+    return view('register');
+});
+
+Route::post('login','Crudcontroller@login');
+
+Route::post('tambahlogin','Crudcontroller@tambahlogin');
+
+Route::get('logout','Crudcontroller@logout');
