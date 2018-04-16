@@ -30,17 +30,28 @@ class Crudcontroller extends Controller
         return View::make('form_add')->with('jurusan',$jurusan);   
     }
 
-    public function tambahdata()
+    public function tambahdata(Request $request)
     {
-        $data = array(
-                'nama' => input::get('nama'),
-                'alamat'=> input::get('alamat'),
-                'semester'=> input::get('semester'),
-                'id_jurusan'=> input::get('id_jurusan')
-            );
+        $param = $request->all();
+        $filename = $request->file('file_photo')->getClientOriginalName();
+        $destinationPath = 'photos/';
+        $proses = $request->file('file_photo')->move($destinationPath, $filename);
 
-        DB::table('siswa')->insert($data);
-        return Redirect::to('/read')->with('message','data berhasil disimpan');
+        if($request->hasFile('file_photo'))
+        {
+            $data = array(
+                    'nama' => $param['nama'],
+                    'alamat'=> $param['alamat'],
+                    'semester'=> $param['semester'],
+                    'id_jurusan'=> $param['id_jurusan'],
+                    'photo'=>$filename,
+                );
+           
+            DB::table('siswa')->insert($data);
+            return Redirect::to('/read')->with('message','data berhasil disimpan');
+        }else{
+            return Redirect::to('/formtambah')->with('message','data gagal disimpan');
+        }
     }
 
     public function lihatdata()
@@ -53,10 +64,9 @@ class Crudcontroller extends Controller
     public function editdata($id)
     {
         $jurusan = DB::table('jurusan')->lists('jurusan','id_jurusan');
-        // $selectedJurusan = DB::table('jurusan')->where('id_jurusan', '=', $jurusan)->first();
         $data = DB::table('siswa')->where('id','=',$id)->first();
         return view('form_edit', compact('jurusan'))->with('siswa', $data);
-        //return View::make('form_edit',array('siswa' => $data, 'jurusan' => $jurusan));
+      
     }
 
     public function hapusdata($id)
@@ -66,19 +76,46 @@ class Crudcontroller extends Controller
         return Redirect::to('/read')->with('message','berhasil menghapus data');
     }
 
-    public function proseseditdata()
-    {
-        $data = array(
-                'nama' => Input::get('nama'),
-                'alamat' => Input::get('alamat'),
-                'semester' => Input::get('semester'),
-                'id_jurusan' => Input::get('id_jurusan')
-            );
+    public function imageTest() { 
+        $menu = new Menu; 
+        $input = Input::all(); 
+        if (Input::hasFile('file')) {
+         $file = Input::file('file');
 
+        $destinationPath = 'menu_images';
+        $filename = $file->getClientOriginalName();
+        $upload_success = Input::file('file')->move($destinationPath, $filename);
+ }
+
+}
+    public function proseseditdata(Request  $request)
+{
+    $param = $request->all();
+    $data = [
+        'nama' => $param['nama'],
+        'alamat'=> $param['alamat'],
+        'semester'=> $param['semester'],
+        'id_jurusan'=> $param['id_jurusan']
+    ];
+
+    $file_photo = $request->file('file_photo');
+    $destinationPath = 'photos/';
+
+    if($file_photo) {
+        $filename = $file_photo->getClientOriginalName();
+        $data['photo'] = $filename;
+
+        $proses = $file_photo->move($destinationPath, $filename);
+    }
+    
+    try {
         DB::table('siswa')->where('id','=',input::get('id'))->update($data);
-
         return Redirect::to('read')->with('message','berhasil mengedit data');
     }
+    catch (\Exception $e) { 
+        return Redirect::to('read')->with('message','data gagal diedit');
+    }
+}
 
     public function search(Request $request){
 

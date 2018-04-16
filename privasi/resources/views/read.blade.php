@@ -38,6 +38,7 @@
                 <th>Alamat</th>
                 <th>Semester</th>
                 <th>Jurusan</th>
+                <th>Photo</th>
                 <th width="15%">Action</th>
               </tr>
             </thead>
@@ -50,6 +51,11 @@
                 <td>{{ $data->alamat}}</td>
                 <td>{{ $data->semester}}</td>
                 <td>{{ $data->jurusan}}</td>
+                @if($data->photo=="")
+                <td><img src="photos/no_image.png" width="30"></td>
+                @else
+                <td><img src="photos/{{ $data->photo}}" width="30"></td>
+                @endif
                 <td>
                 	<a href="formedit/{{ $data->id }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> Edit</a> || 
                 	<a href="hapus/{{ $data->id }}" onclick="return confirm('Apakah anda yakin?')"  class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete</a>

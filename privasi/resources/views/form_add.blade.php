@@ -9,7 +9,13 @@
 			<div class="panel panel-default">
 			  <div class="panel-heading">CRUD WITH LARAVEL <a href="{{ url('read') }}" title="click to see data" style="float:right;"><b>Data</b></a></div>
 			  <div class="panel-body">
-			    {!! Form::open(['url' => '/prosestambah']) !!}
+			  	  	@if(Session::has('message'))
+					  <div class="alert alert-danger alert-dismissable">
+					    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					    <strong>Warning!</strong> {{ Session::get('message') }}
+					  </div>
+					@endif
+			    {!! Form::open(['url' => '/prosestambah','files'=>'true']) !!}
 			    	<div class="form-group">
 			    		<label>Nama</label>
 			    	{!! Form::text('nama', '', ['placeholder'=> 'Nama','class'=> 'form-control']) !!}
@@ -25,6 +31,10 @@
 			    	<div class="form-group">
 			    		<label>Jurusan</label>
 			    	{!! Form::select('id_jurusan', $jurusan, null, ['placeholder' => 'Select Jurusan...', 'class'=> 'form-control' ]) !!}
+			    	</div>
+			    	<div class="form-group">
+			    		<label>Photo</label>
+			    	{!! Form::input('file','file_photo', '') !!}
 			    	</div>
 			    	<div class="form-group">
 			    		{!! Form::submit('Tambah Data', ['class'=> 'btn btn-danger']) !!}
