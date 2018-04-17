@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\validasilogin;
+use App\Http\Requests\validasiregister;
+use App\Http\Requests\validasitambah;    
 use Input;
 use DB;
 use Redirect;
@@ -30,26 +33,34 @@ class Crudcontroller extends Controller
         return View::make('form_add')->with('jurusan',$jurusan);   
     }
 
-    public function tambahdata(Request $request)
+    public function tambahdata(Request $request,validasitambah $param)
     {
         $param = $request->all();
-        $filename = $request->file('file_photo')->getClientOriginalName();
-        $destinationPath = 'photos/';
-        $proses = $request->file('file_photo')->move($destinationPath, $filename);
-
-        if($request->hasFile('file_photo'))
-        {
-            $data = array(
-                    'nama' => $param['nama'],
-                    'alamat'=> $param['alamat'],
-                    'semester'=> $param['semester'],
+        // set validation
+        $nama = $param['nama'];
+        $alamat = $param['alamat'];
+        $semester = $param['semester'];
+        // end set validation
+        $data = array(
+                    'nama' => $nama,
+                    'alamat'=> $alamat,
+                    'semester'=> $semester,
                     'id_jurusan'=> $param['id_jurusan'],
-                    'photo'=>$filename,
                 );
-           
+
+        $file_photo = $request->file('file_photo');
+        $destinationPath = 'photos/';
+
+        if($file_photo)
+        {
+            $filename = $file_photo->getClientOriginalName();
+            $data['photo'] = $filename;
+            $proses = $file_photo->move($destinationPath, $filename);
+        }
+        try {
             DB::table('siswa')->insert($data);
             return Redirect::to('/read')->with('message','data berhasil disimpan');
-        }else{
+        }catch (\Exception $e) {
             return Redirect::to('/formtambah')->with('message','data gagal disimpan');
         }
     }
@@ -57,7 +68,7 @@ class Crudcontroller extends Controller
     public function lihatdata()
     {
        
-        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->paginate(8);
+        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->paginate(10);
         return View::make('read')->with('siswa',$data);
     }
 
@@ -124,11 +135,13 @@ class Crudcontroller extends Controller
         return view('read', compact($data))->with('siswa',$data);;
     }
 
-    public function tambahlogin()
+    public function tambahlogin(validasiregister $data)
     {
+        $username = $data->username;
+        $password = bcrypt($data->password);
         $data = array(
-                        'username'=>Input::get('username'),
-                        'password'=>bcrypt(Input::get('password')),
+                        'username'=>$username,
+                        'password'=>$password,
                         'hak_akses'=>'user'
 
             );
@@ -136,7 +149,7 @@ class Crudcontroller extends Controller
         return Redirect('/register')->with('message','Berhasil mendaftar');
     }
 
-    public function login()
+    public function login(validasilogin $validasi)
     {
         if(Auth::attempt(['username'=> Input::get('username'), 'password' => Input::get('password')]))
         {
@@ -147,7 +160,7 @@ class Crudcontroller extends Controller
                return Redirect::to('home');
             }
         }else{
-            echo "gagal login";
+            return Redirect::to('login')->with('message','Gagal login, harap masukan username dan password');
         }
     }
 
@@ -156,7 +169,7 @@ class Crudcontroller extends Controller
         Auth::logout();
         return Redirect::to('login')->with('message','Terima kasih, Anda berhasil keluar..');
     }
-    
+
     // DEFAULT FUNCTION
     /**
      * Show the form for creating a new resource.

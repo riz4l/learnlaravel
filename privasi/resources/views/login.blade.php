@@ -14,9 +14,9 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			@if(Session::has('message'))
-				<div class="alert alert-success alert-dismissable">
+				<div class="alert alert-info alert-dismissable">
 				   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				   <strong>Success!</strong> {{ Session::get('message') }}
+				   <strong>Information!</strong> {{ Session::get('message') }}
 				</div>
 			@endif
 			<div class="panel panel-default">

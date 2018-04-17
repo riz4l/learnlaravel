@@ -17,14 +17,23 @@
 							    	<div class="form-group">
 							    		<label>Nama</label>
 							    	{!! Form::text('nama', '', ['placeholder'=> 'Nama','class'=> 'form-control']) !!}
+							    	@if($errors->has())
+						    			<span class="label label-danger">{!! $errors->first('nama') !!}</span>
+						    		@endif
 							    	</div>
 							    	<div class="form-group">
 							    		<label>Alamat</label>
 							    	{!! Form::textarea('alamat', '', ['placeholder'=> 'Alamat','class'=> 'form-control', 'cols'=>'3', 'rows'=>'3']) !!}
+							    	@if($errors->has())
+						    			<span class="label label-danger">{!! $errors->first('alamat') !!}</span>
+						    		@endif
 							    	</div>
 							    	<div class="form-group">
 							    		<label>Semester</label>
 							    	{!! Form::text('semester', '', ['placeholder'=> 'Semester','class'=> 'form-control']) !!}
+							    	@if($errors->has())
+						    			<span class="label label-danger">{!! $errors->first('semester') !!}</span>
+						    		@endif
 							    	</div>
 							    	<div class="form-group">
 							    		<label>Jurusan</label>
