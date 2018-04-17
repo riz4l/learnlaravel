@@ -57,7 +57,7 @@ class Crudcontroller extends Controller
     public function lihatdata()
     {
        
-        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->paginate(5);
+        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->paginate(8);
         return View::make('read')->with('siswa',$data);
     }
 
@@ -156,6 +156,7 @@ class Crudcontroller extends Controller
         Auth::logout();
         return Redirect::to('login')->with('message','Terima kasih, Anda berhasil keluar..');
     }
+    
     // DEFAULT FUNCTION
     /**
      * Show the form for creating a new resource.
