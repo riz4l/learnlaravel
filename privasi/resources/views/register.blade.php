@@ -1,6 +1,14 @@
-@extends('template/t_index')
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-COMPATIBLE" content="IE-Edge">
+		<meta name="description" content="Belajar Laravel Bersama Rizki Fahrizal">
+		<title>Learn Laravel 5.1 with Rizki Fahrizal</title>
+		{!! Html::style('assets/css/bootstrap.min.css') !!}
+</head>
 
-@section('content')
+<body>
 <h2 align="center">Registrasi User</h2>
 <div class="container">
 	<div class="row">
@@ -12,6 +20,7 @@
 				</div>
 			@endif
 			<div class="panel panel-default">
+			  <div class="panel-heading">Register</div>
 			  <div class="panel-body">
 			    {!! Form::open(['url' => '/tambahlogin']) !!}
 			    	<div class="form-group">
@@ -38,7 +47,13 @@
 				  	<small align="center">Sudah punya akun? <a href="{{ url('login') }}">Login</a></small>
 				</div>
 			</div>
-			 @stop
 		</div>
 	</div>
 </div>
+
+{!! Html::script('assets/js/jquery-1.10.2.min.js') !!}
+{!! Html::script('assets/js/bootstrap.min.js') !!}
+
+</body>
+
+</html>
