@@ -29,8 +29,15 @@ class Crudcontroller extends Controller
 
     public function tambah()
     {
-        $jurusan = DB::table('jurusan')->orderBy('id_jurusan', 'asc')->lists('jurusan','id_jurusan');
-        return View::make('form_add')->with('jurusan',$jurusan);   
+        if(Auth::user())
+        {
+            $jurusan = DB::table('jurusan')->orderBy('id_jurusan', 'asc')->lists('jurusan','id_jurusan');
+            return View::make('form_add')->with('jurusan',$jurusan);   
+        
+        }else{
+
+            return Redirect::to('login')->with('message','Harap Login Terlebih Dahulu');
+        }
     }
 
     public function tambahdata(Request $request,validasitambah $param)
@@ -67,17 +74,29 @@ class Crudcontroller extends Controller
 
     public function lihatdata()
     {
-       
-        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->paginate(10);
-        return View::make('read')->with('siswa',$data);
+       if(Auth::user()){ 
+
+            $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->paginate(10);
+            return View::make('read')->with('siswa',$data);
+
+        }else{ 
+
+            return Redirect::to('login')->with('message','Harap Login Terlebih Dahulu'); 
+        }
     }
 
     public function editdata($id)
     {
-        $jurusan = DB::table('jurusan')->lists('jurusan','id_jurusan');
-        $data = DB::table('siswa')->where('id','=',$id)->first();
-        return view('form_edit', compact('jurusan'))->with('siswa', $data);
-      
+        if(Auth::user())
+        {
+            $jurusan = DB::table('jurusan')->lists('jurusan','id_jurusan');
+            $data = DB::table('siswa')->where('id','=',$id)->first();
+            return view('form_edit', compact('jurusan'))->with('siswa', $data);
+
+        }else{
+
+            return Redirect::to('login')->with('message','Harap Login Terlebih Dahulu'); 
+        }
     }
 
     public function hapusdata($id)
@@ -130,9 +149,17 @@ class Crudcontroller extends Controller
 
     public function search(Request $request){
 
-        $cari = $request->get('search');
-        $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->where('nama','LIKE','%'.$cari.'%')->paginate(10);
-        return view('read', compact($data))->with('siswa',$data);;
+        if(Auth::user())
+        {
+
+            $cari = $request->get('search');
+            $data = DB::table('siswa')->join('jurusan', 'siswa.id_jurusan', '=', 'jurusan.id_jurusan')->where('nama','LIKE','%'.$cari.'%')->paginate(10);
+            return view('read', compact($data))->with('siswa',$data);;
+        
+        }else{
+
+            return Redirect::to('login')->with('message','Harap Login Terlebih Dahulu'); 
+        }
     }
 
     public function tambahlogin(validasiregister $data)
