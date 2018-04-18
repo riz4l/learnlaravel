@@ -26,7 +26,8 @@ class validasitambah extends Request
         return [
             'nama'=>'required',
             'alamat'=>'required',
-            'semester'=>'required'
+            'semester'=>'required',
+            'file_photo' => 'mimes:jpeg,jpg,png|required'
         ];
     }
 
@@ -35,7 +36,8 @@ class validasitambah extends Request
         return [
             'nama.required'=>'Nama Harus diisi',
             'alamat.required'=>'Alamat Harus diisi',
-            'semester.required'=>'Semester Harus diisi'
+            'semester.required'=>'Semester Harus diisi',
+            'file_photo.mimes'=>'Type Photo harus format jpg/jpeg/png',
         ];
     }
 }

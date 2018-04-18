@@ -42,6 +42,9 @@
 							    	<div class="form-group">
 							    		<label>Photo</label>
 							    	{!! Form::input('file','file_photo', '') !!}
+							    	@if($errors->has())
+						    			<span class="label label-danger">{!! $errors->first('file_photo') !!}</span>
+						    		@endif
 							    	</div>
 							    	<div class="form-group">
 							    		{!! Form::submit('Tambah Data', ['class'=> 'btn btn-danger']) !!}
