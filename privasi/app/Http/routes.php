@@ -53,3 +53,19 @@ Route::post('login','Crudcontroller@login');
 Route::post('tambahlogin','Crudcontroller@tambahlogin');
 
 Route::get('logout','Crudcontroller@logout');
+
+// Route for Jurusan
+
+Route::get('jurusan','JurusanController@index');
+
+Route::get('jurusantambah','JurusanController@create');
+
+Route::post('jurusantambahdata','JurusanController@store');
+
+Route::get('jurusanedit/{id}','JurusanController@edit');
+
+Route::post('jurusaneditdata','JurusanController@update');
+
+Route::get('delete/{id}','JurusanController@destroy');
+
+Route::get('cari_jurusan','JurusanController@search');

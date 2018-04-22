@@ -24,7 +24,13 @@ class Crudcontroller extends Controller
      */
     public function index()
     {
-        return View('/home');
+        if(Auth::user())
+        {
+            return View('/home');
+         }else{
+
+            return Redirect::to('login')->with('message','Harap Login Terlebih Dahulu');
+        }
     }
 
     public function tambah()

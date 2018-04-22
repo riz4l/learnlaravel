@@ -11,6 +11,10 @@
 		    .glyphicon-position {
 		        margin-left: -20px;
 		    }
+            .sidebar-nav li.active {
+                color: #fff;
+                background: rgba(255,255,255,0.2) !important;
+            }
 		</style>
 		<!--
         Author : Rizki Fahrizal
@@ -32,6 +36,9 @@
                 </li>
                 <li>
                     <a href="{{ url('home') }}"><span class="glyphicon glyphicon-dashboard glyphicon-position "></span> Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{ url('jurusan') }}"><span class="glyphicon glyphicon glyphicon-bookmark glyphicon-position"></span> Jurusan</a>
                 </li>
                 <li>
                     <a href="{{ url('read') }}"><span class="glyphicon glyphicon-list glyphicon-position "></span> Mahasiswa</a>
