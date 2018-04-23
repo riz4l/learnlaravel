@@ -27,7 +27,7 @@ class validasitambah extends Request
             'nama'=>'required',
             'alamat'=>'required',
             'semester'=>'required',
-            'file_photo' => 'mimes:jpeg,jpg,png|required'
+            'file_photo' => 'mimes:jpeg,jpg,png'
         ];
     }
 
