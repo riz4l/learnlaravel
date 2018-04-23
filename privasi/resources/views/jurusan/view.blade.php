@@ -18,10 +18,10 @@
                         <div class="row">
                           <div class="col-md-6">
                             <a href="{{ url('jurusan') }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-list"></span> Data</a>
-                            <a href="{{ url('jurusantambah') }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-plus"></span> Tambah</a>
+                            <a href="{{ url('jurusan/tambah') }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-plus"></span> Tambah</a>
                           </div>
                           <div class="col-md-6">  
-                            {!! Form::open(['method'=>'GET','url'=>'/cari_jurusan','role'=>'search']) !!}
+                            {!! Form::open(['method'=>'GET','url'=>'/jurusan/data','role'=>'search']) !!}
                             <div class="input-group">
                               <input type="text" class="form-control input-sm" name="search" placeholder="search..">
                               <span class="input-group-btn">
@@ -48,8 +48,8 @@
                                       <td>{{ $no++ }}</td>
                                       <td>{{ $data->jurusan}}</td>
                                       <td>
-                                      	<a href="jurusanedit/{{ $data->id_jurusan }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> Edit</a> || 
-                                      	<a href="delete/{{ $data->id_jurusan }}" onclick="return confirm('Apakah anda yakin?')"  class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                      	<a href="jurusan/edit/{{ $data->id_jurusan }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> Edit</a> || 
+                                      	<a href="jurusan/delete/{{ $data->id_jurusan }}" onclick="return confirm('Apakah anda yakin?')"  class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                                       </td>
                                     </tr>
                                     @endforeach
