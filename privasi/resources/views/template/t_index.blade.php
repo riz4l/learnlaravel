@@ -12,8 +12,11 @@
 		        margin-left: -20px;
 		    }
             .sidebar-nav li.active {
-                color: #fff;
                 background: rgba(255,255,255,0.2) !important;
+            }
+
+            .sidebar-nav li.active  a {
+                color: #fff;
             }
 		</style>
 		<!--
@@ -34,14 +37,14 @@
                         Learn Laravel 5.1
                     </a>
                 </li>
-                <li>
+                <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}">
                     <a href="{{ url('home') }}"><span class="glyphicon glyphicon-dashboard glyphicon-position "></span> Dashboard</a>
                 </li>
-                <li>
+                <li class="{{ Request::segment(1) === 'jurusan' ? 'active' : null }}">
                     <a href="{{ url('jurusan') }}"><span class="glyphicon glyphicon glyphicon-bookmark glyphicon-position"></span> Jurusan</a>
                 </li>
-                <li>
-                    <a href="{{ url('read') }}"><span class="glyphicon glyphicon-list glyphicon-position "></span> Mahasiswa</a>
+                <li class="{{ Request::segment(1) === 'mahasiswa' ? 'active' : null }}">
+                    <a href="{{ url('mahasiswa') }}"><span class="glyphicon glyphicon-list glyphicon-position "></span> Mahasiswa</a>
                 </li>
                  <li>
                     <a href="{{ url('logout')}}" title="{{ Auth::user()->username }}"><span class="glyphicon glyphicon-off glyphicon-position "></span> Logout</a>

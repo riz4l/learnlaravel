@@ -26,19 +26,19 @@ Route::get('/', function () {
 
 Route::get('/home','Crudcontroller@index');
 
-Route::get('formtambah','Crudcontroller@tambah');
+Route::get('mahasiswa/tambah','Crudcontroller@tambah');
 
 Route::post('prosestambah','Crudcontroller@tambahdata');
 
-Route::get('read','Crudcontroller@lihatdata');
+Route::get('mahasiswa','Crudcontroller@lihatdata');
 
-Route::get('hapus/{id}','Crudcontroller@hapusdata');
+Route::get('mahasiswa/hapus/{id}','Crudcontroller@hapusdata');
 
-Route::get('formedit/{id}','Crudcontroller@editdata');
+Route::get('mahasiswa/edit/{id}','Crudcontroller@editdata');
 
 Route::post('prosesedit','Crudcontroller@proseseditdata');
 
-Route::get('cari','Crudcontroller@search');
+Route::get('mahasiswa/data','Crudcontroller@search');
 
 Route::get('login', function () {
     return view('login');
@@ -58,14 +58,14 @@ Route::get('logout','Crudcontroller@logout');
 
 Route::get('jurusan','JurusanController@index');
 
-Route::get('jurusantambah','JurusanController@create');
+Route::get('jurusan/tambah','JurusanController@create');
 
 Route::post('jurusantambahdata','JurusanController@store');
 
-Route::get('jurusanedit/{id}','JurusanController@edit');
+Route::get('jurusan/edit/{id}','JurusanController@edit');
 
 Route::post('jurusaneditdata','JurusanController@update');
 
-Route::get('delete/{id}','JurusanController@destroy');
+Route::get('jurusan/delete/{id}','JurusanController@destroy');
 
-Route::get('cari_jurusan','JurusanController@search');
+Route::get('jurusan/data','JurusanController@search');
